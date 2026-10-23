@@ -19,6 +19,8 @@ extends Control
 @onready var _finestra: Window = %FinestraImpostazioni
 @onready var _btn_impostazioni: Button = %ImpostazioniButton
 @onready var _btn_cronologia: Button = %CronologiaButton
+@onready var _btn_taglia_sheet: Button = %TagliaSheetButton
+@onready var _finestra_taglia_sheet: Window = %FinestraTagliaSheet
 @onready var _cronologia: Window = %FinestraCronologia
 @onready var _btn_copia_diag: Button = %CopiaDiagButton
 @onready var _lingua: OptionButton = %LinguaOption   # scelta_lingua.gd
@@ -75,6 +77,8 @@ func _ready() -> void:
 	_cronologia.imposta(_sidecar)
 	_cronologia.rigenerata.connect(_pann_genera.segui)
 	_btn_cronologia.pressed.connect(_cronologia.apri)
+	_btn_taglia_sheet.pressed.connect(func() -> void:
+		_finestra_taglia_sheet.popup_centered())
 	_prepara_collegamenti()
 	get_viewport().size_changed.connect(_adatta)
 	_adatta()

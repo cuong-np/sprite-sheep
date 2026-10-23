@@ -28,6 +28,28 @@ func _init() -> void:
 	var formato: OptionButton = genera.get_node("%FormatoOption")
 	_verifica(formato.item_count == 6, "formati: %d" % formato.item_count)
 	_verifica(genera.get_node("%MargineOption").item_count == 3, "margini")
+
+	# Se la scena non serializza le opzioni, i due controlli devono comunque
+	# avere una scelta valida: e' il caso che lasciava i menu vuoti su Windows.
+	var formato_di_ripiego := OptionButton.new()
+	formato_di_ripiego.name = "FormatoOption"
+	formato_di_ripiego.set_script(load("res://scripts/scelta_ricordata.gd"))
+	root.add_child(formato_di_ripiego)
+	await process_frame
+	_verifica(formato_di_ripiego.item_count == 6, "ripiego formati")
+	_verifica(formato_di_ripiego.selected >= 0, "ripiego formato non selezionato")
+	_verifica(formato_di_ripiego.valore() in ["1:1", "3:4", "4:3", "9:16", "16:9", "21:9"],
+		"valore formato di ripiego")
+	formato_di_ripiego.free()
+	var margine_di_ripiego := OptionButton.new()
+	margine_di_ripiego.name = "MargineOption"
+	margine_di_ripiego.set_script(load("res://scripts/scelta_ricordata.gd"))
+	root.add_child(margine_di_ripiego)
+	await process_frame
+	_verifica(margine_di_ripiego.item_count == 3, "ripiego margini")
+	_verifica(margine_di_ripiego.selected >= 0, "ripiego margine non selezionato")
+	margine_di_ripiego.free()
+
 	var lista = genera.get_node("%ListaAzioni")
 	lista.aggiungi({"nome": "idle", "prompt": "p", "durata_s": 2.0, "n_frame": 16})
 	_verifica(lista.azioni().size() == 1, "lista azioni")

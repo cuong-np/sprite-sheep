@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/finestra_taglia_sheet.gd" id="1_taglia"]
+
+[node name="FinestraTagliaSheet" type="Window"]
+title = "Tacha sprite sheet"
+initial_position = 2
+size = Vector2i(760, 720)
+visible = false
+transient = true
+exclusive = true
+script = ExtResource("1_taglia")
+
+[node name="Margine" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="Colonna" type="VBoxContainer" parent="Margine"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Descrizione" type="Label" parent="Margine/Colonna"]
+layout_mode = 2
+text = "Carica un foglio a griglia ed esporta ogni cella come PNG indipendente."
+autowrap_mode = 3
+
+[node name="RigaImmagine" type="HBoxContainer" parent="Margine/Colonna"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScegliImmagine" type="Button" parent="Margine/Colonna/RigaImmagine"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Scegli sprite sheet..."
+
+[node name="PercorsoImmagine" type="Label" parent="Margine/Colonna/RigaImmagine"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nessun file scelto"
+text_overrun_behavior = 3
+
+[node name="Anteprima" type="TextureRect" parent="Margine/Colonna"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 330)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfoGriglia" type="Label" parent="Margine/Colonna"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Imposta la griglia e il numero di celle da esportare."
+autowrap_mode = 3
+
+[node name="RigaGriglia" type="HBoxContainer" parent="Margine/Colonna"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ColonneBox" type="VBoxContainer" parent="Margine/Colonna/RigaGriglia"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColonneLabel" type="Label" parent="Margine/Colonna/RigaGriglia/ColonneBox"]
+layout_mode = 2
+text = "Colonne"
+
+[node name="Colonne" type="SpinBox" parent="Margine/Colonna/RigaGriglia/ColonneBox"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 5.0
+
+[node name="RigheBox" type="VBoxContainer" parent="Margine/Colonna/RigaGriglia"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RigheLabel" type="Label" parent="Margine/Colonna/RigaGriglia/RigheBox"]
+layout_mode = 2
+text = "Righe"
+
+[node name="Righe" type="SpinBox" parent="Margine/Colonna/RigaGriglia/RigheBox"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 5.0
+
+[node name="FrameBox" type="VBoxContainer" parent="Margine/Colonna/RigaGriglia"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FrameLabel" type="Label" parent="Margine/Colonna/RigaGriglia/FrameBox"]
+layout_mode = 2
+text = "Frame da esportare"
+
+[node name="NumeroFrame" type="SpinBox" parent="Margine/Colonna/RigaGriglia/FrameBox"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 24.0
+
+[node name="RitagliaCheck" type="CheckBox" parent="Margine/Colonna"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ritaglia i bordi trasparenti di ogni frame"
+
+[node name="RigaUscita" type="HBoxContainer" parent="Margine/Colonna"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScegliCartella" type="Button" parent="Margine/Colonna/RigaUscita"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cartella di uscita..."
+
+[node name="PercorsoUscita" type="Label" parent="Margine/Colonna/RigaUscita"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Accanto allo sheet, in una nuova cartella"
+text_overrun_behavior = 3
+
+[node name="Esporta" type="Button" parent="Margine/Colonna"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Esporta sprite PNG"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Scegli sprite sheet"
+initial_position = 2
+size = Vector2i(760, 520)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png, *.webp, *.jpg, *.jpeg ; Images")
+
+[node name="CartellaDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Scegli cartella di uscita"
+initial_position = 2
+size = Vector2i(760, 520)
+file_mode = 2
+access = 2

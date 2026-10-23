@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1spritesheep0main"]
+[gd_scene load_steps=12 format=3 uid="uid://b1spritesheep0main"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/sidecar_client.gd" id="2_sidecar"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/pannello_risultato.tscn" id="8_ris"]
 [ext_resource type="Script" path="res://scripts/finestra_cronologia.gd" id="9_cron"]
 [ext_resource type="Script" path="res://scripts/scelta_lingua.gd" id="10_lingua"]
+[ext_resource type="PackedScene" path="res://scenes/finestra_taglia_sheet.tscn" id="11_taglia"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -114,6 +115,12 @@ size_flags_vertical = 4
 tooltip_text = "Generazioni passate: apri, confronta, rigenera con un altro seme"
 text = "Cronologia"
 
+[node name="TagliaSheetButton" type="Button" parent="Margine/Colonna/Barra/Riga"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Tacha sprite sheet"
+
 [node name="ImpostazioniButton" type="Button" parent="Margine/Colonna/Barra/Riga"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -165,6 +172,9 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 script = ExtResource("9_cron")
+
+[node name="FinestraTagliaSheet" parent="." instance=ExtResource("11_taglia")]
+unique_name_in_owner = true
 
 [node name="FinestraImpostazioni" type="Window" parent="."]
 unique_name_in_owner = true
